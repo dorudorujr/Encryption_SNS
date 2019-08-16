@@ -42,14 +42,15 @@ class _MainViewState extends State {
           children: <Widget>[
             Container(
               width: 200,
-              padding: EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(16.0),
               child: TextField(
                 controller: passWordTextFieldController,
               ),
             ),
-            new Text(
-              "b",
-              style: new TextStyle(fontWeight: FontWeight.bold),
+            RaisedButton(
+              color: Colors.red,
+              onPressed: (){},
+              child: Text("RELEASE"),
             ),
           ],
         ),
