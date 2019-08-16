@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:encryption_sns/application_bloc_provider.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainView()
+      home: ApplicationBlocProvider(child: MainView(),)//MainView()
     );
   }
 }
@@ -35,6 +36,7 @@ class _MainViewState extends State {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = ApplicationBlocProvider.of(context).applicationBloc;
     return Scaffold(
       body: Center(
         child: Column(
@@ -53,6 +55,7 @@ class _MainViewState extends State {
             RaisedButton(
               color: Colors.red,
               onPressed: (){
+                bloc.setPassWord(passWordTextFieldController.text);
                 passWordTextFieldController.clear();
               },
               child: Text("RELEASE"),
