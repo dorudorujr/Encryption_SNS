@@ -44,12 +44,17 @@ class _MainViewState extends State {
               width: 200,
               padding: EdgeInsets.all(16.0),
               child: TextField(
+                decoration: InputDecoration(
+                    labelText: "PassWord",
+                ),
                 controller: passWordTextFieldController,
               ),
             ),
             RaisedButton(
               color: Colors.red,
-              onPressed: (){},
+              onPressed: (){
+                passWordTextFieldController.clear();
+              },
               child: Text("RELEASE"),
             ),
           ],
