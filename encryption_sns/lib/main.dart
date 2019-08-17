@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:encryption_sns/application_bloc_provider.dart';
+import 'package:encryption_sns/process_view.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +13,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ApplicationBlocProvider(child: MainView(),)//MainView()
+      home: ApplicationBlocProvider(child: MainView(),),
+      routes: <String, WidgetBuilder> {
+        '/main': (BuildContext context) => new ApplicationBlocProvider(child: MainView(),),
+        '/processView': (BuildContext context) => new ProcessView(),
+      },//MainView()
     );
   }
 }
@@ -56,6 +61,7 @@ class _MainViewState extends State {
               color: Colors.red,
               onPressed: (){
                 bloc.setPassWord(passWordTextFieldController.text);
+                Navigator.pushNamed(context, '/processView');
                 passWordTextFieldController.clear();
               },
               child: Text("RELEASE"),
