@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       home: ApplicationBlocProvider(child: MainView(),),
       routes: <String, WidgetBuilder> {
         '/main': (BuildContext context) => new ApplicationBlocProvider(child: MainView(),),
-        '/processView': (BuildContext context) => new Process(),
+        '/processView': (BuildContext context) => new ApplicationBlocProvider(child: Process(),)
       },//MainView()
     );
   }
