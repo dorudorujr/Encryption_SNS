@@ -4,7 +4,7 @@ class ApplicationBloc {
   String _passWord;
 
   ApplicationBloc() {
-    _passWord = "";
+    this._passWord = "";
   }
 
   void setPassWord(String passWord) {
