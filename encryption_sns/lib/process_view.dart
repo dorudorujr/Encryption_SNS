@@ -34,21 +34,12 @@ class _ProcessViewState extends State {
       },
       child: Scaffold(
         appBar: AppBar(title: Text('処理画面')),
-        body: Center(
-          child: Container(
-            //width: 200,
-            padding: EdgeInsets.all(16.0),
-            child: TextField(
-              decoration: InputDecoration(
-                labelText: "Text",
-              ),
-              controller: textFieldController,
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              textAlign: TextAlign.left,
-              focusNode: this.focusNode,
-            ),
-          ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            _textField(),
+            _resultTextCard(),
+          ],
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
@@ -76,5 +67,36 @@ class _ProcessViewState extends State {
     setState(() {
       this._currentIndex = index;
     });
+  }
+
+  Widget _textField() {
+    return Container(
+      padding: EdgeInsets.only(top: 10,left: 20,right: 20,bottom: 10),
+      child: TextField(
+        decoration: InputDecoration(
+            hintText: "Text"
+        ),
+        controller: textFieldController,
+        keyboardType: TextInputType.multiline,
+        maxLines: 10,
+        maxLength: 500,
+        maxLengthEnforced: true,
+        textAlign: TextAlign.left,
+        focusNode: this.focusNode,
+      ),
+    );
+  }
+
+  Widget _resultTextCard() {
+    return Card(
+      elevation: 4.0,
+      margin: const EdgeInsets.all(16.0),
+      child: Container(
+        padding: EdgeInsets.all(10),
+        width: 400,
+        height: 200,
+        child: Text(""),
+      ),
+    );
   }
 }
