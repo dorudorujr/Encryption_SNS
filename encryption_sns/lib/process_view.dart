@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:encryption_sns/application_bloc_provider.dart';
 
 class Process extends StatelessWidget {
   @override
@@ -28,6 +29,8 @@ class _ProcessViewState extends State {
 
   @override
   Widget build(BuildContext context) {
+    final applicationBloc = ApplicationBlocProvider.of(context).applicationBloc;
+
     return GestureDetector(
       onTap: (){
         focusNode.unfocus();
@@ -56,7 +59,19 @@ class _ProcessViewState extends State {
           onTap: (int index) {
             //ここに処理関数を指定する
             onNavigationBarItemChanged(index);
-            print(index); //
+
+            switch(index) {
+              case 0: {
+                applicationBloc.encryption.add(null);
+              }
+              break;
+              case 1: {
+                applicationBloc.decryption.add(null);
+              }
+              break;
+              default: {}
+              break;
+            }
           },
         ),
       ),
