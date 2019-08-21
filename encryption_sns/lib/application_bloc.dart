@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:encrypt/encrypt.dart';
 
 class ApplicationBloc {
   final _encryptionController = StreamController<void>();
@@ -9,6 +10,7 @@ class ApplicationBloc {
 
 
   String _passWord;
+  final iv = IV.fromLength(16);
 
   ApplicationBloc() {
     this._passWord = "";
@@ -31,7 +33,9 @@ class ApplicationBloc {
   }
 
   void _encryption() {
-    print("encryption");
+    final key = Key.fromUtf8('my 32 length key................');
+    Encrypter encrypter = Encrypter(AES(key));
+    print(encrypter.encrypt('test', iv: iv).base64);
   }
 
   void _decryption() {
