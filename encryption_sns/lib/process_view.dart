@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:encryption_sns/application_bloc.dart';
+import 'package:flutter_selectable_text/flutter_selectable_text.dart';
 
 class ProcessView extends StatefulWidget {
   final ApplicationBloc _applicationBloc;

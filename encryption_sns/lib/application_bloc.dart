@@ -31,6 +31,7 @@ class ApplicationBloc {
   void dispose() {
     _encryptionController.close();
     _decryptionController.close();
+    _showingTextController.close();
   }
 
   void setPassWord(String passWord) {
@@ -46,11 +47,12 @@ class ApplicationBloc {
   void _encryption(String text) {
     final key = Key.fromUtf8(_passWord);   //keyの文字列は32文字必要
     Encrypter encrypter = Encrypter(AES(key));
-    //print(encrypter.encrypt(text, iv: iv).base64);
     _processNotificationText.add(encrypter.encrypt(text, iv: iv).base64);
   }
 
   void _decryption(String text) {
-    print("decryption");
+    final key = Key.fromUtf8(_passWord);
+    Encrypter encrypter = Encrypter(AES(key));
+    print(encrypter.decrypt64(text, iv: iv));
   }
 }
