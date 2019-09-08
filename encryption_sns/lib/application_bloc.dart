@@ -2,25 +2,23 @@ import 'dart:async';
 import 'package:encrypt/encrypt.dart';
 
 class ApplicationBloc {
-  final _encryptionController = StreamController<void>();
-  final _decryptionController = StreamController<void>();
+  final _encryptionController = StreamController<String>();
+  final _decryptionController = StreamController<String>();
 
-  StreamSink<void> get encryption => _encryptionController.sink;
-  StreamSink<void> get decryption => _decryptionController.sink;
+  StreamSink<String> get encryption => _encryptionController.sink;
+  StreamSink<String> get decryption => _decryptionController.sink;
 
 
-  String _passWord;
+  String _passWord = "";
   final iv = IV.fromLength(16);
 
   ApplicationBloc() {
-    this._passWord = "";
-
     _bind();
   }
 
   void _bind() {
-    _encryptionController.stream.listen((_) => _encryption());
-    _decryptionController.stream.listen((_) => _decryption());
+    _encryptionController.stream.listen((value){ _encryption(value); });
+    _decryptionController.stream.listen((value) => _decryption(value));
   }
 
   void dispose() {
@@ -29,16 +27,22 @@ class ApplicationBloc {
   }
 
   void setPassWord(String passWord) {
+    int _notEnoughKeyLenght = 32 - passWord.length;
+
+    for(int i = 0; i < _notEnoughKeyLenght; i++) {
+     passWord  = passWord + ".";
+    }
+
     this._passWord = passWord;
   }
 
-  void _encryption() {
-    final key = Key.fromUtf8('my 32 length key................');
+  void _encryption(String text) {
+    final key = Key.fromUtf8(_passWord);   //keyの文字列は32文字必要
     Encrypter encrypter = Encrypter(AES(key));
-    print(encrypter.encrypt('test', iv: iv).base64);
+    print(encrypter.encrypt(text, iv: iv).base64);
   }
 
-  void _decryption() {
+  void _decryption(String text) {
     print("decryption");
   }
 }

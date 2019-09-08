@@ -13,11 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ApplicationBlocProvider(child: MainView(),),
-      routes: <String, WidgetBuilder> {
-        '/main': (BuildContext context) => new ApplicationBlocProvider(child: MainView(),),
-        '/processView': (BuildContext context) => new ApplicationBlocProvider(child: Process(),)
-      },//MainView()
+      home: ApplicationBlocProvider(child: MainView(),), //MainView()
     );
   }
 }
@@ -55,13 +51,20 @@ class _MainViewState extends State {
                     labelText: "PassWord",
                 ),
                 controller: passWordTextFieldController,
+                maxLength: 32,
               ),
             ),
             RaisedButton(
               color: Colors.red,
               onPressed: (){
                 bloc.setPassWord(passWordTextFieldController.text);
-                Navigator.pushNamed(context, '/processView');
+                Navigator.push(
+                  context,
+                  new MaterialPageRoute<Null>(
+                    settings: const RouteSettings(name: "/processView"),
+                    builder: (BuildContext context) => new ProcessView(bloc)
+                  ),
+                );
                 passWordTextFieldController.clear();
               },
               child: Text("RELEASE"),

@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:encryption_sns/application_bloc_provider.dart';
-
-class Process extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ProcessView();
-  }
-}
-
+import 'package:encryption_sns/application_bloc.dart';
 
 class ProcessView extends StatefulWidget {
+  final ApplicationBloc _applicationBloc;
+
+  ProcessView(this._applicationBloc);
+
   @override
-  _ProcessViewState createState() => new _ProcessViewState();
+  _ProcessViewState createState() => new _ProcessViewState(this._applicationBloc);
 }
 
 class _ProcessViewState extends State {
@@ -19,6 +15,9 @@ class _ProcessViewState extends State {
   int _currentIndex = 0;
   final textFieldController = TextEditingController();
   FocusNode focusNode = FocusNode();
+  final ApplicationBloc _applicationBloc;
+
+  _ProcessViewState(this._applicationBloc);
 
   @override
   // widgetの破棄時にコントローラも破棄する
@@ -29,21 +28,23 @@ class _ProcessViewState extends State {
 
   @override
   Widget build(BuildContext context) {
-    final applicationBloc = ApplicationBlocProvider.of(context).applicationBloc;
-
+    final applicationBloc = this._applicationBloc;
     return GestureDetector(
       onTap: (){
         focusNode.unfocus();
       },
       child: Scaffold(
         appBar: AppBar(title: Text('処理画面')),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            _textField(),
-            _resultTextCard(),
-          ],
-        ),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              _textField(),
+              _resultTextCard(),
+            ],
+          ),
+        )
+        ,
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
           items: [
@@ -62,11 +63,11 @@ class _ProcessViewState extends State {
 
             switch(index) {
               case 0: {
-                applicationBloc.encryption.add(null);
+                applicationBloc.encryption.add(textFieldController.text);
               }
               break;
               case 1: {
-                applicationBloc.decryption.add(null);
+                applicationBloc.decryption.add(textFieldController.text);
               }
               break;
               default: {}
