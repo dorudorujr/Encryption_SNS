@@ -111,7 +111,15 @@ class _ProcessViewState extends State {
         padding: EdgeInsets.all(10),
         width: 400,
         height: 200,
-        child: Text(""),
+        child: StreamBuilder(
+          stream: _applicationBloc.showingText,                //出力用streamを取得
+          builder: (context, snapshot) {
+            return Text(
+              snapshot.hasData ? snapshot.data : '',
+              style: TextStyle(fontSize: 38.0),
+            );
+          },
+        )
       ),
     );
   }

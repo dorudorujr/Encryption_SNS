@@ -4,9 +4,16 @@ import 'package:encrypt/encrypt.dart';
 class ApplicationBloc {
   final _encryptionController = StreamController<String>();
   final _decryptionController = StreamController<String>();
+  final _showingTextController = StreamController<String>();
 
+  // 入力用sinkのGetter
   StreamSink<String> get encryption => _encryptionController.sink;
   StreamSink<String> get decryption => _decryptionController.sink;
+  StreamSink<String> get _processNotificationText => _showingTextController.sink;
+
+  // 出力用streamのGetter
+  Stream<String> get showingText => _showingTextController.stream;
+
 
 
   String _passWord = "";
@@ -39,7 +46,8 @@ class ApplicationBloc {
   void _encryption(String text) {
     final key = Key.fromUtf8(_passWord);   //keyの文字列は32文字必要
     Encrypter encrypter = Encrypter(AES(key));
-    print(encrypter.encrypt(text, iv: iv).base64);
+    //print(encrypter.encrypt(text, iv: iv).base64);
+    _processNotificationText.add(encrypter.encrypt(text, iv: iv).base64);
   }
 
   void _decryption(String text) {
