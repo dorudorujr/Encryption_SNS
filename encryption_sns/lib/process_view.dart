@@ -115,13 +115,17 @@ class _ProcessViewState extends State {
         child: StreamBuilder(
           stream: _applicationBloc.showingText,                //出力用streamを取得
           builder: (context, snapshot) {
-            return Text(
-              snapshot.hasData ? snapshot.data : '',
-              style: TextStyle(fontSize: 15.0),
-            );
+            return _resultText(snapshot.hasData ? snapshot.data.toString() : "");
           },
         )
       ),
     );
+  }
+
+  Widget _resultText(String resultText) {
+    return Text(
+             resultText.isNotEmpty ? resultText : '',
+              style: TextStyle(fontSize: 15.0),
+           );
   }
 }
