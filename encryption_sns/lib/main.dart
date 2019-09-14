@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:encryption_sns/application_bloc_provider.dart';
 import 'package:encryption_sns/process_view.dart';
+import 'package:encryption_sns/application_bloc.dart';
 
 void main() => runApp(MyApp());
 
@@ -43,33 +44,48 @@ class _MainViewState extends State {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(
-              width: 200,
-              padding: EdgeInsets.all(16.0),
-              child: TextField(
-                decoration: InputDecoration(
-                    labelText: "PassWord",
-                ),
-                controller: passWordTextFieldController,
-                maxLength: 32,
-              ),
-            ),
-            RaisedButton(
-              color: Colors.red,
-              onPressed: (){
-                bloc.setPassWord(passWordTextFieldController.text);
-                Navigator.push(
-                  context,
-                  new MaterialPageRoute<Null>(
-                    settings: const RouteSettings(name: "/processView"),
-                    builder: (BuildContext context) => new ProcessView(bloc)
-                  ),
-                );
-                passWordTextFieldController.clear();
-              },
-              child: Text("RELEASE"),
-            ),
+            _passwordTextField(),
+            _raisedButton(bloc),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _passwordTextField() {
+    return Container(
+      width: 200,
+      padding: EdgeInsets.all(16.0),
+      child: TextField(
+        decoration: InputDecoration(
+          labelText: "PassWord",
+        ),
+        controller: passWordTextFieldController,
+        maxLength: 32,
+      ),
+    );
+  }
+
+  Widget _raisedButton(ApplicationBloc bloc) {
+    return RaisedButton(
+      color: Colors.red,
+      onPressed: (){
+        bloc.setPassWord(passWordTextFieldController.text);
+        Navigator.push(
+          context,
+          new MaterialPageRoute<Null>(
+              settings: const RouteSettings(name: "/processView"),
+              builder: (BuildContext context) => new ProcessView(bloc)
+          ),
+        );
+        passWordTextFieldController.clear();
+      },
+      child: Text("解除"),
+      shape: CircleBorder(
+        side: BorderSide(
+          color: Colors.black,
+          width: 1.0,
+          style: BorderStyle.solid,
         ),
       ),
     );

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:encryption_sns/application_bloc.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_selectable_text/flutter_selectable_text.dart';
 
 class ProcessView extends StatefulWidget {
   final ApplicationBloc _applicationBloc;
@@ -125,13 +124,11 @@ class _ProcessViewState extends State {
 
   Widget _resultText(String resultText) {
     return GestureDetector(
-      onTap: (){
-        final data = ClipboardData(text: resultText);
-        Clipboard.setData(data);
+      child: new Tooltip(preferBelow: false,
+          message: "Copy", child: new Text(resultText)),
+      onTap: () {
+        Clipboard.setData(new ClipboardData(text: resultText));
       },
-      child: Text(
-        resultText,
-      ),
     );
   }
 }
