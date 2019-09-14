@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:encryption_sns/application_bloc.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_selectable_text/flutter_selectable_text.dart';
 
 class ProcessView extends StatefulWidget {
@@ -117,15 +118,20 @@ class _ProcessViewState extends State {
           builder: (context, snapshot) {
             return _resultText(snapshot.hasData ? snapshot.data.toString() : "");
           },
-        )
+        ),
       ),
     );
   }
 
   Widget _resultText(String resultText) {
-    return Text(
-             resultText.isNotEmpty ? resultText : '',
-              style: TextStyle(fontSize: 15.0),
-           );
+    return GestureDetector(
+      onTap: (){
+        final data = ClipboardData(text: resultText);
+        Clipboard.setData(data);
+      },
+      child: Text(
+        resultText,
+      ),
+    );
   }
 }
