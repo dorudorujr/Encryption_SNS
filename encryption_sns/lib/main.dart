@@ -67,7 +67,14 @@ class _MainViewState extends State {
                 );
                 passWordTextFieldController.clear();
               },
-              child: Text("RELEASE"),
+              child: Text("解除"),
+              shape: CircleBorder(
+                side: BorderSide(
+                  color: Colors.black,
+                  width: 1.0,
+                  style: BorderStyle.solid,
+                ),
+              ),
             ),
           ],
         ),
