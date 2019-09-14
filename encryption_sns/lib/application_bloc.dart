@@ -53,6 +53,6 @@ class ApplicationBloc {
   void _decryption(String text) {
     final key = Key.fromUtf8(_passWord);
     Encrypter encrypter = Encrypter(AES(key));
-    print(encrypter.decrypt64(text, iv: iv));
+    _processNotificationText.add(encrypter.decrypt64(text, iv: iv));
   }
 }
