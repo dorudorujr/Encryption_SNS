@@ -125,13 +125,11 @@ class _ProcessViewState extends State {
 
   Widget _resultText(String resultText) {
     return GestureDetector(
-      onTap: (){
-        final data = ClipboardData(text: resultText);
-        Clipboard.setData(data);
+      child: new Tooltip(preferBelow: false,
+          message: "Copy", child: new Text(resultText)),
+      onTap: () {
+        Clipboard.setData(new ClipboardData(text: resultText));
       },
-      child: Text(
-        resultText,
-      ),
     );
   }
 }
