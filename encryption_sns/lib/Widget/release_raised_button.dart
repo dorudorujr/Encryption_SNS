@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:encryption_sns/process_view.dart';
-import 'package:encryption_sns/application_bloc.dart';
 import 'package:encryption_sns/application_bloc_provider.dart';
 
 class ReleaseRaisedButton extends StatelessWidget {
