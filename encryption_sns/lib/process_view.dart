@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:encryption_sns/application_bloc.dart';
 import 'package:flutter/services.dart';
+import 'package:encryption_sns/Widget/ProcessView/bottom_navigationbar.dart';
 
 class ProcessView extends StatefulWidget {
   final ApplicationBloc applicationBloc;
@@ -42,44 +43,9 @@ class _ProcessViewState extends State<ProcessView> {
           ),
         )
         ,
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          items: [
-            new BottomNavigationBarItem(
-                icon: new Icon(Icons.lock_outline),
-                title: Text("暗号化")
-            ),
-            new BottomNavigationBarItem(
-                icon: new Icon(Icons.lock_open),
-                title: Text("復号化")
-            ),
-          ],
-          onTap: (int index) {
-            //ここに処理関数を指定する
-            onNavigationBarItemChanged(index);
-
-            switch(index) {
-              case 0: {
-                widget.applicationBloc.encryption.add(textFieldController.text);
-              }
-              break;
-              case 1: {
-                widget.applicationBloc.decryption.add(textFieldController.text);
-              }
-              break;
-              default: {}
-              break;
-            }
-          },
-        ),
+        bottomNavigationBar: ProcessBottomNavigationBar(applicationBloc: widget.applicationBloc, textFieldController: textFieldController),
       ),
     );
-  }
-
-  void onNavigationBarItemChanged(int index) {
-    setState(() {
-      this._currentIndex = index;
-    });
   }
 
   Widget _textField() {
