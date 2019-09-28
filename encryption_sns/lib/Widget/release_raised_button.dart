@@ -18,7 +18,7 @@ class ReleaseRaisedButton extends StatelessWidget {
           context,
           new MaterialPageRoute<Null>(
               settings: const RouteSettings(name: "/processView"),
-              builder: (BuildContext context) => new ProcessView(bloc)
+              builder: (BuildContext context) => new ProcessView(applicationBloc: bloc)
           ),
         );
         passWordTextFieldController.clear();

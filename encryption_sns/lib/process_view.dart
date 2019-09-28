@@ -3,22 +3,19 @@ import 'package:encryption_sns/application_bloc.dart';
 import 'package:flutter/services.dart';
 
 class ProcessView extends StatefulWidget {
-  final ApplicationBloc _applicationBloc;
+  final ApplicationBloc applicationBloc;
 
-  ProcessView(this._applicationBloc);
+  ProcessView({Key key, @required this.applicationBloc}) : super(key: key);
 
   @override
-  _ProcessViewState createState() => new _ProcessViewState(this._applicationBloc);
+  _ProcessViewState createState() => new _ProcessViewState();
 }
 
-class _ProcessViewState extends State {
+class _ProcessViewState extends State<ProcessView> {
 
   int _currentIndex = 0;
   final textFieldController = TextEditingController();
   FocusNode focusNode = FocusNode();
-  final ApplicationBloc _applicationBloc;
-
-  _ProcessViewState(this._applicationBloc);
 
   @override
   // widgetの破棄時にコントローラも破棄する
@@ -29,7 +26,6 @@ class _ProcessViewState extends State {
 
   @override
   Widget build(BuildContext context) {
-    final applicationBloc = this._applicationBloc;
     return GestureDetector(
       onTap: (){
         focusNode.unfocus();
@@ -64,11 +60,11 @@ class _ProcessViewState extends State {
 
             switch(index) {
               case 0: {
-                applicationBloc.encryption.add(textFieldController.text);
+                widget.applicationBloc.encryption.add(textFieldController.text);
               }
               break;
               case 1: {
-                applicationBloc.decryption.add(textFieldController.text);
+                widget.applicationBloc.decryption.add(textFieldController.text);
               }
               break;
               default: {}
@@ -113,7 +109,7 @@ class _ProcessViewState extends State {
         width: 400,
         height: 200,
         child: StreamBuilder(
-          stream: _applicationBloc.showingText,                //出力用streamを取得
+          stream: widget.applicationBloc.showingText,                //出力用streamを取得
           builder: (context, snapshot) {
             return _resultText(snapshot.hasData ? snapshot.data.toString() : "");
           },
