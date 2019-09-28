@@ -15,7 +15,6 @@ class ProcessView extends StatefulWidget {
 
 class _ProcessViewState extends State<ProcessView> {
 
-  int _currentIndex = 0;
   final textFieldController = TextEditingController();
   FocusNode focusNode = FocusNode();
 
