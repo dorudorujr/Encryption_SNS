@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:encryption_sns/application_bloc.dart';
 import 'package:flutter/services.dart';
+import 'package:encryption_sns/Widget/ProcessView/bottom_navigationbar.dart';
+import 'package:encryption_sns/Widget/ProcessView/result_text_card.dart';
 
 class ProcessView extends StatefulWidget {
-  final ApplicationBloc _applicationBloc;
+  final ApplicationBloc applicationBloc;
 
-  ProcessView(this._applicationBloc);
+  ProcessView({Key key, @required this.applicationBloc}) : super(key: key);
 
   @override
-  _ProcessViewState createState() => new _ProcessViewState(this._applicationBloc);
+  _ProcessViewState createState() => new _ProcessViewState();
 }
 
-class _ProcessViewState extends State {
+class _ProcessViewState extends State<ProcessView> {
 
-  int _currentIndex = 0;
   final textFieldController = TextEditingController();
   FocusNode focusNode = FocusNode();
-  final ApplicationBloc _applicationBloc;
-
-  _ProcessViewState(this._applicationBloc);
 
   @override
   // widgetの破棄時にコントローラも破棄する
@@ -29,7 +27,6 @@ class _ProcessViewState extends State {
 
   @override
   Widget build(BuildContext context) {
-    final applicationBloc = this._applicationBloc;
     return GestureDetector(
       onTap: (){
         focusNode.unfocus();
@@ -41,49 +38,14 @@ class _ProcessViewState extends State {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               _textField(),
-              _resultTextCard(),
+              ResultTextCard(applicationBloc: widget.applicationBloc),
             ],
           ),
         )
         ,
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          items: [
-            new BottomNavigationBarItem(
-                icon: new Icon(Icons.lock_outline),
-                title: Text("暗号化")
-            ),
-            new BottomNavigationBarItem(
-                icon: new Icon(Icons.lock_open),
-                title: Text("復号化")
-            ),
-          ],
-          onTap: (int index) {
-            //ここに処理関数を指定する
-            onNavigationBarItemChanged(index);
-
-            switch(index) {
-              case 0: {
-                applicationBloc.encryption.add(textFieldController.text);
-              }
-              break;
-              case 1: {
-                applicationBloc.decryption.add(textFieldController.text);
-              }
-              break;
-              default: {}
-              break;
-            }
-          },
-        ),
+        bottomNavigationBar: ProcessBottomNavigationBar(applicationBloc: widget.applicationBloc, textFieldController: textFieldController),
       ),
     );
-  }
-
-  void onNavigationBarItemChanged(int index) {
-    setState(() {
-      this._currentIndex = index;
-    });
   }
 
   Widget _textField() {
@@ -101,34 +63,6 @@ class _ProcessViewState extends State {
         textAlign: TextAlign.left,
         focusNode: this.focusNode,
       ),
-    );
-  }
-
-  Widget _resultTextCard() {
-    return Card(
-      elevation: 4.0,
-      margin: const EdgeInsets.all(16.0),
-      child: Container(
-        padding: EdgeInsets.all(10),
-        width: 400,
-        height: 200,
-        child: StreamBuilder(
-          stream: _applicationBloc.showingText,                //出力用streamを取得
-          builder: (context, snapshot) {
-            return _resultText(snapshot.hasData ? snapshot.data.toString() : "");
-          },
-        ),
-      ),
-    );
-  }
-
-  Widget _resultText(String resultText) {
-    return GestureDetector(
-      child: new Tooltip(preferBelow: false,
-          message: "Copy", child: new Text(resultText)),
-      onTap: () {
-        Clipboard.setData(new ClipboardData(text: resultText));
-      },
     );
   }
 }

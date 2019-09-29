@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:encryption_sns/application_bloc_provider.dart';
-import 'package:encryption_sns/process_view.dart';
-import 'package:encryption_sns/application_bloc.dart';
+import 'package:encryption_sns/Widget/password_text_field.dart';
+import 'package:encryption_sns/Widget/release_raised_button.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,81 +14,39 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ApplicationBlocProvider(child: MainView(),), //MainView()
+      home: TopView(), //MainView()
     );
   }
 }
 
-class MainView extends StatefulWidget {
+class TopView extends StatefulWidget {
   @override
-  _MainViewState createState() => new _MainViewState();
+  _TopViewState createState() => new _TopViewState();
 }
 
-class _MainViewState extends State {
-
+class _TopViewState extends State<TopView> {
   final passWordTextFieldController = TextEditingController();
-
 
   @override
   // widgetの破棄時にコントローラも破棄する
   void dispose() {
-    passWordTextFieldController.dispose();
     super.dispose();
+    passWordTextFieldController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final bloc = ApplicationBlocProvider.of(context).applicationBloc;
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            _passwordTextField(),
-            _raisedButton(bloc),
+            PasswordTextField(passWordTextFieldController: passWordTextFieldController),
+            ApplicationBlocProvider(child: ReleaseRaisedButton(passWordTextFieldController: passWordTextFieldController),),
           ],
         ),
       ),
     );
   }
-
-  Widget _passwordTextField() {
-    return Container(
-      width: 200,
-      padding: EdgeInsets.all(16.0),
-      child: TextField(
-        decoration: InputDecoration(
-          labelText: "PassWord",
-        ),
-        controller: passWordTextFieldController,
-        maxLength: 32,
-      ),
-    );
-  }
-
-  Widget _raisedButton(ApplicationBloc bloc) {
-    return RaisedButton(
-      color: Colors.red,
-      onPressed: (){
-        bloc.setPassWord(passWordTextFieldController.text);
-        Navigator.push(
-          context,
-          new MaterialPageRoute<Null>(
-              settings: const RouteSettings(name: "/processView"),
-              builder: (BuildContext context) => new ProcessView(bloc)
-          ),
-        );
-        passWordTextFieldController.clear();
-      },
-      child: Text("解除"),
-      shape: CircleBorder(
-        side: BorderSide(
-          color: Colors.black,
-          width: 1.0,
-          style: BorderStyle.solid,
-        ),
-      ),
-    );
-  }
-
 }
+
