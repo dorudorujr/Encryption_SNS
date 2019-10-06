@@ -14,7 +14,7 @@ class ProcessView extends StatefulWidget {
 }
 
 class _ProcessViewState extends State<ProcessView> {
-
+  final appBar = AppBar(title: Text('処理画面'));
   final textFieldController = TextEditingController();
   FocusNode focusNode = FocusNode();
 
@@ -32,7 +32,7 @@ class _ProcessViewState extends State<ProcessView> {
         focusNode.unfocus();
       },
       child: Scaffold(
-        appBar: AppBar(title: Text('処理画面')),
+        appBar: appBar,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
