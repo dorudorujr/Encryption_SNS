@@ -46,7 +46,6 @@ class ApplicationBloc {
 
   void _encryption(String text) {
     final key = Key.fromUtf8(_passWord);   //keyの文字列は32文字必要
-    print(_passWord);
     Encrypter encrypter = Encrypter(AES(key));
     _processNotificationText.add(encrypter.encrypt(text, iv: iv).base64);
   }
