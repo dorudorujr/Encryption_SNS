@@ -16,7 +16,7 @@ class ProcessView extends StatefulWidget {
 class _ProcessViewState extends State<ProcessView> {
   final appBar = AppBar(title: Text('処理画面'));
   final textFieldController = TextEditingController();
-  FocusNode focusNode = FocusNode();
+  final FocusNode focusNode = FocusNode();
 
   @override
   // widgetの破棄時にコントローラも破棄する
