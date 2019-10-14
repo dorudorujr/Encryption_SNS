@@ -12,6 +12,16 @@ class ProcessBottomNavigationBar extends StatefulWidget {
 }
 
 class _BottomNavigationBarState extends State<ProcessBottomNavigationBar> {
+  
+  final encryptionBottomNavigationBar = new BottomNavigationBarItem(
+      icon: new Icon(Icons.lock_outline),
+      title: Text("暗号化")
+  );
+  final decryptionBottomNavigationBar = new BottomNavigationBarItem(
+      icon: new Icon(Icons.lock_open),
+      title: Text("復号化")
+  );
+
   int _currentIndex = 0;
 
   @override
@@ -19,14 +29,8 @@ class _BottomNavigationBarState extends State<ProcessBottomNavigationBar> {
     return BottomNavigationBar(
       currentIndex: _currentIndex,
       items: [
-        new BottomNavigationBarItem(
-            icon: new Icon(Icons.lock_outline),
-            title: Text("暗号化")
-        ),
-        new BottomNavigationBarItem(
-            icon: new Icon(Icons.lock_open),
-            title: Text("復号化")
-        ),
+        this.encryptionBottomNavigationBar,
+        this.decryptionBottomNavigationBar,
       ],
       onTap: (int index) {
         //ここに処理関数を指定する
