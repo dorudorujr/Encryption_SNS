@@ -12,7 +12,7 @@ class ProcessBottomNavigationBar extends StatefulWidget {
 }
 
 class _BottomNavigationBarState extends State<ProcessBottomNavigationBar> {
-  
+
   final encryptionBottomNavigationBar = new BottomNavigationBarItem(
       icon: new Icon(Icons.lock_outline),
       title: Text("暗号化")

@@ -32,6 +32,7 @@ class ResultTextCardState extends State<ResultTextCard> {
     );
   }
 
+  //TODO:statelessで定義できると思う
   Widget _resultText(String resultText) {
     return GestureDetector(
       child: new Tooltip(preferBelow: false,
