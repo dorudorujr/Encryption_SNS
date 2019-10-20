@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:encryption_sns/application_bloc.dart';
-import 'package:flutter/services.dart';
 import 'package:encryption_sns/Widget/ProcessView/bottom_navigationbar.dart';
 import 'package:encryption_sns/Widget/ProcessView/result_text_card.dart';
+import 'package:encryption_sns/Widget/ProcessView/input_text_field.dart';
 
 class ProcessView extends StatefulWidget {
   final ApplicationBloc applicationBloc;
@@ -15,15 +15,7 @@ class ProcessView extends StatefulWidget {
 
 class _ProcessViewState extends State<ProcessView> {
   final appBar = AppBar(title: Text('処理画面'));
-  final textFieldController = TextEditingController();
   final FocusNode focusNode = FocusNode();
-
-  @override
-  // widgetの破棄時にコントローラも破棄する
-  void dispose() {
-    textFieldController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,31 +29,13 @@ class _ProcessViewState extends State<ProcessView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              _textField(),
+              InputTextField(applicationBloc: widget.applicationBloc, focusNode: this.focusNode),
               ResultTextCard(applicationBloc: widget.applicationBloc),
             ],
           ),
         )
         ,
-        bottomNavigationBar: ProcessBottomNavigationBar(applicationBloc: widget.applicationBloc, textFieldController: textFieldController),
-      ),
-    );
-  }
-
-  Widget _textField() {
-    return Container(
-      padding: EdgeInsets.only(top: 10,left: 20,right: 20,bottom: 10),
-      child: TextField(
-        decoration: InputDecoration(
-            hintText: "Text"
-        ),
-        controller: textFieldController,
-        keyboardType: TextInputType.multiline,
-        maxLines: 10,
-        maxLength: 500,
-        maxLengthEnforced: true,
-        textAlign: TextAlign.left,
-        focusNode: this.focusNode,
+        bottomNavigationBar: ProcessBottomNavigationBar(applicationBloc: widget.applicationBloc),
       ),
     );
   }

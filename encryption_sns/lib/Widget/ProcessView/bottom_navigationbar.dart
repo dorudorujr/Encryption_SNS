@@ -3,9 +3,8 @@ import 'package:encryption_sns/application_bloc.dart';
 
 class ProcessBottomNavigationBar extends StatefulWidget {
   final ApplicationBloc applicationBloc;
-  final TextEditingController textFieldController;
 
-  ProcessBottomNavigationBar({Key key, @required this.applicationBloc, @required this.textFieldController}) : super(key: key);
+  ProcessBottomNavigationBar({Key key, @required this.applicationBloc}) : super(key: key);
 
   @override
   _BottomNavigationBarState createState() => new _BottomNavigationBarState();
@@ -38,11 +37,11 @@ class _BottomNavigationBarState extends State<ProcessBottomNavigationBar> {
 
         switch(index) {
           case 0: {
-            widget.applicationBloc.encryption.add(widget.textFieldController.text);
+            widget.applicationBloc.encryption.add("test");
           }
           break;
           case 1: {
-            widget.applicationBloc.decryption.add(widget.textFieldController.text);
+            widget.applicationBloc.decryption.add("test");
           }
           break;
           default: {}
