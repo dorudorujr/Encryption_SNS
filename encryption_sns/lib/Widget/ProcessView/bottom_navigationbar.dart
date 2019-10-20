@@ -37,11 +37,11 @@ class _BottomNavigationBarState extends State<ProcessBottomNavigationBar> {
 
         switch(index) {
           case 0: {
-            widget.applicationBloc.encryption.add("test");
+            widget.applicationBloc.encryption.add(null);
           }
           break;
           case 1: {
-            widget.applicationBloc.decryption.add("test");
+            widget.applicationBloc.decryption.add(null);
           }
           break;
           default: {}
