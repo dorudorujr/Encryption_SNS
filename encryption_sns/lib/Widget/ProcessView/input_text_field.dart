@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:encryption_sns/application_bloc.dart';
+import 'package:encryption_sns/application_bloc_provider.dart';
 
 class InputTextField extends StatefulWidget {
-  final ApplicationBloc applicationBloc;
   final FocusNode focusNode;
 
-  InputTextField({Key key, @required this.applicationBloc, @required this.focusNode}) : super(key: key);
+  InputTextField({Key key, @required this.focusNode}) : super(key: key);
 
   @override
   InputTextFieldState createState() => new InputTextFieldState();
@@ -30,6 +30,7 @@ class InputTextFieldState extends State<InputTextField> {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = ApplicationBlocProvider.of(context).applicationBloc;
     return Container(
       padding: EdgeInsets.only(top: 10,left: 20,right: 20,bottom: 10),
       child: TextField(
@@ -44,13 +45,13 @@ class InputTextFieldState extends State<InputTextField> {
         textAlign: TextAlign.left,
         focusNode: widget.focusNode,
         onChanged: (text) {
-          _tellTextToApplicationBloc(text);
+          _tellTextToApplicationBloc(bloc,text);
         },
       ),
     );
   }
 
-  _tellTextToApplicationBloc(String text) {
-    widget.applicationBloc.addProcessInputTextFieldController.add(_textFieldController.text);
+  _tellTextToApplicationBloc(ApplicationBloc bloc, String text) {
+    bloc.addProcessInputTextFieldController.add(_textFieldController.text);
   }
 }

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:encryption_sns/application_bloc.dart';
+import 'package:encryption_sns/application_bloc_provider.dart';
 
 class ProcessBottomNavigationBar extends StatefulWidget {
-  final ApplicationBloc applicationBloc;
-
-  ProcessBottomNavigationBar({Key key, @required this.applicationBloc}) : super(key: key);
+  ProcessBottomNavigationBar({Key key}) : super(key: key);
 
   @override
   _BottomNavigationBarState createState() => new _BottomNavigationBarState();
@@ -25,6 +23,7 @@ class _BottomNavigationBarState extends State<ProcessBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = ApplicationBlocProvider.of(context).applicationBloc;
     return BottomNavigationBar(
       currentIndex: _currentIndex,
       items: [
@@ -37,11 +36,11 @@ class _BottomNavigationBarState extends State<ProcessBottomNavigationBar> {
 
         switch(index) {
           case 0: {
-            widget.applicationBloc.encryption.add(null);
+            bloc.encryption.add(null);
           }
           break;
           case 1: {
-            widget.applicationBloc.decryption.add(null);
+            bloc.decryption.add(null);
           }
           break;
           default: {}
