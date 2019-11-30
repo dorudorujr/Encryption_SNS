@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:encryption_sns/application_bloc.dart';
 import 'package:flutter/services.dart';
 import 'package:encryption_sns/application_bloc_provider.dart';
 

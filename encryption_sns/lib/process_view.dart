@@ -30,13 +30,13 @@ class _ProcessViewState extends State<ProcessView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              InputTextField(applicationBloc: widget.applicationBloc, focusNode: this.focusNode),
+              ApplicationBlocProvider(child: InputTextField(focusNode: this.focusNode),),
               ApplicationBlocProvider(child: ResultTextCard(),),
             ],
           ),
         )
         ,
-        bottomNavigationBar: ProcessBottomNavigationBar(applicationBloc: widget.applicationBloc),
+        bottomNavigationBar: ApplicationBlocProvider(child: ProcessBottomNavigationBar(),),
       ),
     );
   }
