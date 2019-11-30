@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:encryption_sns/application_bloc_provider.dart';
+import 'package:encryption_sns/Bloc/application_bloc_provider.dart';
 
 class ResultTextCard extends StatefulWidget {
   ResultTextCard({Key key,}) : super(key: key);
