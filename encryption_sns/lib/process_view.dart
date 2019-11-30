@@ -3,6 +3,7 @@ import 'package:encryption_sns/application_bloc.dart';
 import 'package:encryption_sns/Widget/ProcessView/bottom_navigationbar.dart';
 import 'package:encryption_sns/Widget/ProcessView/result_text_card.dart';
 import 'package:encryption_sns/Widget/ProcessView/input_text_field.dart';
+import 'package:encryption_sns/application_bloc_provider.dart';
 
 class ProcessView extends StatefulWidget {
   final ApplicationBloc applicationBloc;
@@ -30,7 +31,7 @@ class _ProcessViewState extends State<ProcessView> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               InputTextField(applicationBloc: widget.applicationBloc, focusNode: this.focusNode),
-              ResultTextCard(applicationBloc: widget.applicationBloc),
+              ApplicationBlocProvider(child: ResultTextCard(),),
             ],
           ),
         )

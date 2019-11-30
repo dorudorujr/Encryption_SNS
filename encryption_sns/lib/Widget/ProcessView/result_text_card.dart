@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:encryption_sns/application_bloc.dart';
 import 'package:flutter/services.dart';
+import 'package:encryption_sns/application_bloc_provider.dart';
 
 class ResultTextCard extends StatefulWidget {
-  final ApplicationBloc applicationBloc;
-
-  ResultTextCard({Key key, @required this.applicationBloc}) : super(key: key);
+  ResultTextCard({Key key,}) : super(key: key);
 
   @override
   ResultTextCardState createState() => new ResultTextCardState();
@@ -15,6 +14,7 @@ class ResultTextCardState extends State<ResultTextCard> {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = ApplicationBlocProvider.of(context).applicationBloc;
     return Card(
       elevation: 4.0,
       margin: const EdgeInsets.all(16.0),
@@ -23,7 +23,7 @@ class ResultTextCardState extends State<ResultTextCard> {
         width: 400,
         height: 200,
         child: StreamBuilder(
-          stream: widget.applicationBloc.showingText,                //出力用streamを取得
+          stream: bloc.showingText,                //出力用streamを取得
           builder: (context, snapshot) {
             return _resultText(snapshot.hasData ? snapshot.data.toString() : "");
           },

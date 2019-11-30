@@ -5,7 +5,9 @@ import 'package:encryption_sns/application_bloc.dart';
 class ApplicationBlocProvider extends InheritedWidget {
   const ApplicationBlocProvider({Key key, Widget child}) : super(key: key, child: child);
 
-  ApplicationBloc get applicationBloc => ApplicationBloc();
+  static ApplicationBloc instance = ApplicationBloc();
+
+  ApplicationBloc get applicationBloc => instance;
 
   @override
   bool updateShouldNotify(_) => true;
