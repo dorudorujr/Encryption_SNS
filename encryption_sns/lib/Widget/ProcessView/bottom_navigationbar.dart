@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:encryption_sns/application_bloc_provider.dart';
+import 'package:encryption_sns/Bloc/application_bloc_provider.dart';
 
 class ProcessBottomNavigationBar extends StatefulWidget {
   ProcessBottomNavigationBar({Key key}) : super(key: key);

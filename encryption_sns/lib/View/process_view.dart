@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:encryption_sns/application_bloc.dart';
+import 'package:encryption_sns/Bloc/application_bloc.dart';
 import 'package:encryption_sns/Widget/ProcessView/bottom_navigationbar.dart';
 import 'package:encryption_sns/Widget/ProcessView/result_text_card.dart';
 import 'package:encryption_sns/Widget/ProcessView/input_text_field.dart';
-import 'package:encryption_sns/application_bloc_provider.dart';
+import 'package:encryption_sns/Bloc/application_bloc_provider.dart';
 
 class ProcessView extends StatefulWidget {
   final ApplicationBloc applicationBloc;

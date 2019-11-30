@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:encryption_sns/View/process_view.dart';
-import 'package:encryption_sns/application_bloc_provider.dart';
+import 'package:encryption_sns/Bloc/application_bloc_provider.dart';
 
 class ReleaseRaisedButton extends StatelessWidget {
   final TextEditingController passWordTextFieldController;
