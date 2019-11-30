@@ -4,7 +4,7 @@ import 'package:encrypt/encrypt.dart';
 class ApplicationBloc {
   final _encryptionController = StreamController<void>();
   final _decryptionController = StreamController<void>();
-  final _showingTextController = StreamController<String>();
+  final _showingTextController = StreamController<String>.broadcast();
 
   final _processInputTextFieldController = StreamController<String>();
 
