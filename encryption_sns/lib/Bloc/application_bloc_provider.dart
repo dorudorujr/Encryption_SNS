@@ -5,7 +5,7 @@ import 'package:encryption_sns/Bloc/application_bloc.dart';
 class ApplicationBlocProvider extends InheritedWidget {
   const ApplicationBlocProvider({Key key, Widget child}) : super(key: key, child: child);
 
-  static ApplicationBloc instance = ApplicationBloc();
+  static ApplicationBloc instance = ApplicationBloc.instance;
 
   ApplicationBloc get applicationBloc => instance;
 

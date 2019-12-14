@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:encrypt/encrypt.dart';
 
 class ApplicationBloc {
+  static ApplicationBloc instance = ApplicationBloc();
+
   final _encryptionController = StreamController<void>();
   final _decryptionController = StreamController<void>();
   final _showingTextController = StreamController<String>.broadcast();
