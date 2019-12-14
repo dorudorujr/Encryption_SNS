@@ -1,7 +1,8 @@
+import 'package:encryption_sns/Bloc/application_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:encryption_sns/Bloc/application_bloc_provider.dart';
 import 'package:encryption_sns/Widget/password_text_field.dart';
 import 'package:encryption_sns/Widget/release_raised_button.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
 
@@ -42,7 +43,11 @@ class _TopViewState extends State<TopView> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             PasswordTextField(passWordTextFieldController: passWordTextFieldController),
-            ApplicationBlocProvider(child: ReleaseRaisedButton(passWordTextFieldController: passWordTextFieldController),),
+            Provider<ApplicationBloc>(
+              builder: (_) => ApplicationBloc.instance,
+              dispose: (_, bloc) => bloc.dispose(),
+              child: ReleaseRaisedButton(passWordTextFieldController: passWordTextFieldController),
+            ),
           ],
         ),
       ),
