@@ -44,7 +44,7 @@ class _TopViewState extends State<TopView> {
           children: <Widget>[
             PasswordTextField(passWordTextFieldController: passWordTextFieldController),
             Provider<ApplicationBloc>(
-              builder: (_) => ApplicationBloc.instance,
+              create: (_) => ApplicationBloc.instance,
               dispose: (_, bloc) => bloc.dispose(),
               child: ReleaseRaisedButton(passWordTextFieldController: passWordTextFieldController),
             ),
