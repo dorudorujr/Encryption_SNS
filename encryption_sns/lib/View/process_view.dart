@@ -3,7 +3,7 @@ import 'package:encryption_sns/Bloc/application_bloc.dart';
 import 'package:encryption_sns/Widget/ProcessView/bottom_navigationbar.dart';
 import 'package:encryption_sns/Widget/ProcessView/result_text_card.dart';
 import 'package:encryption_sns/Widget/ProcessView/input_text_field.dart';
-import 'package:encryption_sns/Bloc/application_bloc_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProcessView extends StatefulWidget {
   final ApplicationBloc applicationBloc;
@@ -30,13 +30,26 @@ class _ProcessViewState extends State<ProcessView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              ApplicationBlocProvider(child: InputTextField(focusNode: this.focusNode),),
-              ApplicationBlocProvider(child: ResultTextCard(),),
+              Provider<ApplicationBloc>(
+                create: (_) => ApplicationBloc.instance,
+                dispose: (_, bloc) => bloc.dispose(),
+                child: InputTextField(focusNode: this.focusNode),
+              ),
+              Provider<ApplicationBloc>(
+                create: (_) => ApplicationBloc.instance,
+                dispose: (_, bloc) => bloc.dispose(),
+                child: ResultTextCard(),
+              ),
             ],
           ),
         )
         ,
-        bottomNavigationBar: ApplicationBlocProvider(child: ProcessBottomNavigationBar(),),
+        bottomNavigationBar:
+          Provider<ApplicationBloc>(
+            create: (_) => ApplicationBloc.instance,
+            dispose: (_, bloc) => bloc.dispose(),
+            child: ProcessBottomNavigationBar(),
+          ),
       ),
     );
   }

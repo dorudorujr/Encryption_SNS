@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:encryption_sns/Bloc/application_bloc_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:encryption_sns/Bloc/application_bloc.dart';
 
 class ProcessBottomNavigationBar extends StatefulWidget {
   ProcessBottomNavigationBar({Key key}) : super(key: key);
@@ -23,7 +24,7 @@ class _BottomNavigationBarState extends State<ProcessBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = ApplicationBlocProvider.of(context).applicationBloc;
+    final bloc = Provider.of<ApplicationBloc>(context);
     return BottomNavigationBar(
       currentIndex: _currentIndex,
       items: [
