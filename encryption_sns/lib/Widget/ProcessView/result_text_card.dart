@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:encryption_sns/Bloc/application_bloc_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:encryption_sns/Bloc/application_bloc.dart';
 
 class ResultTextCard extends StatefulWidget {
   ResultTextCard({Key key,}) : super(key: key);
@@ -13,7 +14,7 @@ class ResultTextCardState extends State<ResultTextCard> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = ApplicationBlocProvider.of(context).applicationBloc;
+    final bloc = Provider.of<ApplicationBloc>(context);
     return Card(
       elevation: 4.0,
       margin: const EdgeInsets.all(16.0),

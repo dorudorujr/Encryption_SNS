@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:encryption_sns/Bloc/application_bloc.dart';
-import 'package:encryption_sns/Bloc/application_bloc_provider.dart';
+import 'package:provider/provider.dart';
 
 class InputTextField extends StatefulWidget {
   final FocusNode focusNode;
@@ -30,7 +30,7 @@ class InputTextFieldState extends State<InputTextField> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = ApplicationBlocProvider.of(context).applicationBloc;
+    final bloc = Provider.of<ApplicationBloc>(context);
     return Container(
       padding: EdgeInsets.only(top: 10,left: 20,right: 20,bottom: 10),
       child: TextField(

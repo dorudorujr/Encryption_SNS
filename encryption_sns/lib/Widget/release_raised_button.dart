@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:encryption_sns/View/process_view.dart';
-import 'package:encryption_sns/Bloc/application_bloc_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:encryption_sns/Bloc/application_bloc.dart';
 
 class ReleaseRaisedButton extends StatelessWidget {
   final TextEditingController passWordTextFieldController;
@@ -9,7 +10,7 @@ class ReleaseRaisedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = ApplicationBlocProvider.of(context).applicationBloc;
+    final bloc = Provider.of<ApplicationBloc>(context);
     return RaisedButton(
       color: Colors.red,
       onPressed: (){
