@@ -14,14 +14,16 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 200,
-      padding: EdgeInsets.all(16.0),
+      width: 300,
+      height: 90,
+      padding: EdgeInsets.all(0.0),
       child: TextField(
         decoration: InputDecoration(
-          labelText: "PassWord",
+          border: OutlineInputBorder()
+          //labelText: "PassWord",
         ),
         controller: widget.passWordTextFieldController,
-        maxLength: 32,
+        maxLength: 6,
       ),
     );
   }
